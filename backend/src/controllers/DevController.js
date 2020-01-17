@@ -25,9 +25,9 @@ module.exports = {
                  techs: techsArray,
                  location
             })
-        }
+       }
     
-        console.log(name, avatar_url, bio, github_username)
+        //console.log(name, avatar_url, bio, github_username)
         return response.json({dev})
     }
 }
