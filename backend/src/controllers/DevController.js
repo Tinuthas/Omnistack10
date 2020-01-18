@@ -35,16 +35,40 @@ module.exports = {
                  location
             })
        }
-    
-        //console.log(name, avatar_url, bio, github_username)
-        return response.json({dev})
+       return response.json({dev})
     },
 
-    async update(resquest, response) {
+    async update(request, response) {
+        const { name, bio, techs, latitude, longitude} = request.body
 
+        let dev = await Dev.findOne(request.params)
+
+        if (name) dev.name = name
+
+        if (bio) dev.bio = bio
+
+        if (techs) {
+            const techsArray = parseStringAsArray(techs)
+            dev.techs = techsArray
+        }
+
+        if (latitude && longitude) {
+            const location = {
+                type: 'Point',
+                coordinates: [longitude, latitude]
+            }
+            dev.location = location
+        }
+
+        await Dev.updateOne(dev)
+
+        return response.json(dev)
     },
 
-    async destroy(resquest, response) {
-
+    async destroy(request, response) {
+        console.log(request.params)
+        let dev = await Dev.findOne(request.params)
+        await Dev.deleteOne(dev)
+        response.json(dev)
     }
 }

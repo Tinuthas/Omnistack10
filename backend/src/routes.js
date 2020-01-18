@@ -10,6 +10,10 @@ router.get('/devs', DevController.index)
 
 router.post('/devs', DevController.store)
 
+router.put('/devs/:_id', DevController.update)
+
+router.delete('/devs/:_id', DevController.destroy)
+
 router.get('/search', SearchController.index)
 
 module.exports = router
