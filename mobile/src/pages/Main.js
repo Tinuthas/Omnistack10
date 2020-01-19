@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react'
-import {StyleSheet} from 'react-native'
-import MapView from 'react-native-maps'
+import {StyleSheet, Image, View, Text} from 'react-native'
+import MapView, {Marker, Callout} from 'react-native-maps'
 import {requestPermissionsAsync, getCurrentPositionAsync} from 'expo-location'
 
 
@@ -31,12 +31,48 @@ function Main() {
         return null
     }
 
-    return <MapView initialRegion={currentRegion} style={styles.map} />
+    return (
+        <MapView initialRegion={currentRegion} style={styles.map}>
+            <Marker coordinate={{latitude: -23.5908361, longitude: -46.8003097}}>
+                <Image style={styles.avatar} source={{uri:'https://avatars0.githubusercontent.com/u/39787034?s=460&v=4'}} />
+                <Callout>
+                    <View style={styles.callout}>
+                        <Text style={styles.devName}>Marcus Vinicius</Text>
+                        <Text style={styles.devBio}>I'm development mobile and fullstack</Text>
+                        <Text style={styles.devTechs}>Java, NodeJS, Python</Text>
+                    </View>
+                </Callout>
+            </Marker>
+        </MapView>
+    )
+
 }
 
 const styles = StyleSheet.create({
     map: {
         flex: 1
+    },
+    avatar:{
+        width: 54,
+        height: 54,
+        borderRadius: 4,
+        borderWidth: 4,
+        borderColor: '#FFF'
+
+    },
+    callout:{
+        width: 260
+    },
+    devName:{
+        fontWeight: 'bold',
+        fontSize: 16
+    },
+    devBio:{
+        color: '#666',
+        marginTop: 5
+    },
+    devTechs:{
+        marginTop: 5
     }
 })
 
