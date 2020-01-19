@@ -4,7 +4,7 @@ import MapView, {Marker, Callout} from 'react-native-maps'
 import {requestPermissionsAsync, getCurrentPositionAsync} from 'expo-location'
 
 
-function Main() {
+function Main({navigation}) {
     const [currentRegion, setCurrentRegion] = useState(null)
     useEffect(() =>{
         async function loadInitialPosition(){
@@ -35,7 +35,10 @@ function Main() {
         <MapView initialRegion={currentRegion} style={styles.map}>
             <Marker coordinate={{latitude: -23.5908361, longitude: -46.8003097}}>
                 <Image style={styles.avatar} source={{uri:'https://avatars0.githubusercontent.com/u/39787034?s=460&v=4'}} />
-                <Callout>
+                <Callout onPress={()=>{
+                    // Navegacao
+                    navigation.navigate('Profile', {github_username: 'Tinuthas'})
+                }}>
                     <View style={styles.callout}>
                         <Text style={styles.devName}>Marcus Vinicius</Text>
                         <Text style={styles.devBio}>I'm development mobile and fullstack</Text>
